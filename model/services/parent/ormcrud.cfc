@@ -1,4 +1,4 @@
-﻿<cfcomponent accessors="true" extends="parentORM" output="false" hint="ormCRUDService">
+﻿<cfcomponent accessors="true" extends="orm" output="false" hint="ormCRUDService">
 
 <cffunction name="load" returntype="any" access="public" output="false" hint="Loads entities - except the deleted ones">
 	<cfparam name="arguments[1]" type="struct" default="#structNew()#" />
