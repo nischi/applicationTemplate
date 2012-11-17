@@ -1,0 +1,1 @@
+﻿<cfoutput>Admin Plugin Output</cfoutput>
