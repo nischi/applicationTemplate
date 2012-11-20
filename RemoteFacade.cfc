@@ -1,0 +1,1 @@
+﻿<cfcomponent extends="libs.mxunit.framework.RemoteFacade" output="false"></cfcomponent>

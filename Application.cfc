@@ -56,7 +56,6 @@
 	<cfset local.beanFactory.setParent(getDefaultBeanFactory()) />
 	<cfset local.beanFactory.addBean('i18n',new libs.i18n('#arguments.subsystem#/languages',{ parent=getDefaultBeanFactory().getBean('i18n') })) />
 	<cfset setSubsystemBeanFactory(arguments.subsystem,local.beanFactory) />
-	<cfdump var="#getBeanFactory().getBean('i18n').getKey('translation')#"><cfabort>
 </cffunction>
 
 
