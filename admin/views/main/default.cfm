@@ -1,1 +1,1 @@
-﻿<cfoutput>Admin Plugin Output</cfoutput>
+﻿<cfoutput>Admin Subsystem Output</cfoutput>

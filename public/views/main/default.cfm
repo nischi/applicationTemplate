@@ -1,1 +1,1 @@
-﻿<cfoutput>Public Display Object Output</cfoutput>
+﻿<cfoutput>Public Subsystem Output</cfoutput>
