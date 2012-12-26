@@ -2,6 +2,16 @@
 
 
 <cfoutput>
+<cfif local.user.hasError()>
+	<ul>
+		<cfloop collection="#local.user.getErrors()#" item="local.property">
+			<cfloop array="#local.user.getErrors(local.property)#" index="local.error">
+				<li>#local.error#</li>
+			</cfloop>
+		</cfloop>
+	</ul>
+</cfif>
+
 <form action="#buildURL('.save')#" method="POST">
 	<input name="ident" id="ident" type="hidden" value="#local.user.getIdent()#" />
 

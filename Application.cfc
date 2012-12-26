@@ -48,6 +48,7 @@
 
 		<cfset local.beanFactory.addBean('framework',this) />
 		<cfset local.beanFactory.addBean('i18n',new libs.i18n('model/languages')) />
+		<cfset local.beanFactory.addBean('validateThis',new validateThis.validateThis({ injectResultIntoBO=true })) />
 
 		<cfset setBeanFactory(local.beanFactory) />
 	</cflock>

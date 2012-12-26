@@ -11,4 +11,4 @@
 			<rule type="required" failureMessage="user.password.required" />
 		</property>
 	</objectProperties>
-</validateThis>﻿
+</validateThis>

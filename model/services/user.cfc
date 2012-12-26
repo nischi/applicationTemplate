@@ -1,3 +1,3 @@
-﻿<cfcomponent accessors="true" extends="parent.ormcrud" output="false" hint="userService">
+﻿<cfcomponent accessors="true" extends="parent.crud" output="false" hint="userService">
 
 </cfcomponent>

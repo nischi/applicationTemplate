@@ -1,4 +1,4 @@
-﻿<cfcomponent accessors="true" mappedSuperClass="true" output="false" hint="crudBean">
+﻿<cfcomponent accessors="true" extends="dao" mappedSuperClass="true" output="false" hint="crudBean">
 
 <cfproperty name="ident"	ormType="string"	notNull="true"	length="36"	fieldType="id"	hint="Unique primary key" />
 

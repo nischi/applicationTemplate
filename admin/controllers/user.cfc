@@ -30,10 +30,12 @@
 	<cfset rc.user = getUserService().new(rc) />
 	<cfset getUserService().validate(rc.user) />
 
-	<cfif NOT rc.user.hasErrors()>
+	<cfif NOT rc.user.hasError()>
 		<cfset getUserService().save(rc.user) />
 		<cfset getFramework().redirect('.list') />
 	</cfif>
+
+	<cfset getFramework().setView('.form') />
 
 	<cfreturn rc />
 </cffunction>
