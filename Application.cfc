@@ -30,10 +30,12 @@
 <cffunction name="frameworkConfig" returnType="struct" access="public" output="false" hint="FW/1 configuration">
 	<cfset local.framework = {
 		usingSubsystems=true,
-		generateSES=true,
 		defaultSubsystem='public'
 	} />
-	<cfset local.framework.reloadApplicationOnEveryRequest = yesNoFormat(getSystemString('framework.reloadApplicationOnEveryRequest')) />
+
+	<cfloop list="generateSES,reloadApplicationOnEveryRequest" index="local.key">
+		<cfset local.framework['#local.key#'] = yesNoFormat(getSystemString('framework.#local.key#')) />
+	</cfloop>
 
 	<cfreturn local.framework />
 </cffunction>

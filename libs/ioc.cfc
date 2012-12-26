@@ -166,7 +166,12 @@ component {
 	// PRIVATE METHODS
 	
 	private boolean function beanIsTransient( string singleDir, string dir, string beanName ) {
-		return singleDir == 'bean' || structKeyExists( variables.transients, dir ) || ( structKeyExists( variables.config, "singletonPattern" ) && refindNoCase( variables.config.singletonPattern, beanName ) == 0 );
+		return singleDir == 'bean' ||
+            structKeyExists( variables.transients, dir ) ||
+            ( structKeyExists( variables.config, "singletonPattern" ) &&
+              refindNoCase( variables.config.singletonPattern, beanName ) == 0 ) ||
+            ( structKeyExists( variables.config, "transientPattern" ) &&
+              refindNoCase( variables.config.transientPattern, beanName ) > 0 );
 	}
 
 
@@ -196,8 +201,8 @@ component {
 		var md = { extends = baseMetadata };
 		do {
 			md = md.extends;
-			// gather up setters based on metadata:
-			var implicitSetters = false;
+		    // gather up setters based on metadata:
+		    var implicitSetters = false;
 			// we have implicit setters if: accessors="true" or persistent="true"
 			if ( structKeyExists( md, 'persistent' ) && isBoolean( md.persistent ) ) {
 				implicitSetters = md.persistent;
@@ -233,7 +238,7 @@ component {
 								var m = arrayLen( func.parameters );
 								for ( var j = 1; j <= m; ++j ) {
 									var arg = func.parameters[ j ];
-									iocMeta.constructor[ arg.name ] = structKeyExists( arg, 'type' ) ? arg.type : 'any';
+									iocMeta.constructor[ arg.name ] = structKeyExists( arg, 'required' ) ? arg.required : false;
 								}
 							}
 						}
@@ -454,10 +459,11 @@ component {
 						for ( var arg in info.metadata.constructor ) {
 							var argBean = resolveBeanCreate( arg, accumulator );
 							// this throws a non-intuitive exception unless we step in...
-							if ( !structKeyExists( argBean, 'bean' ) ) {
+							if ( structKeyExists( argBean, 'bean' ) ) {
+							    args[ arg ] = argBean.bean;
+                            } else if ( info.metadata.constructor[ arg ] ) {
 								throw 'bean not found: #arg#; while resolving constructor arguments for #beanName#';
 							}
-							args[ arg ] = argBean.bean;
 						}
 						var __ioc_newBean = evaluate( 'bean.init( argumentCollection = args )' );
 						// if the constructor returns anything, it becomes the bean
@@ -470,12 +476,14 @@ component {
 						}
 					}
 				}
-				var setterMeta = findSetters( bean, info.metadata );
-				setterMeta.bean = bean;
-				accumulator.injection[ beanName ] = setterMeta; 
-				for ( var property in setterMeta.setters ) {
-					resolveBeanCreate( property, accumulator );
-				}
+                if ( !structKeyExists( accumulator.injection, beanName ) ) {
+				    var setterMeta = findSetters( bean, info.metadata );
+				    setterMeta.bean = bean;
+				    accumulator.injection[ beanName ] = setterMeta; 
+				    for ( var property in setterMeta.setters ) {
+					    resolveBeanCreate( property, accumulator );
+				    }
+                }
 				accumulator.bean = bean;
 			} else if ( structKeyExists( info, 'value' ) ) {
 				accumulator.bean = info.value;
@@ -519,8 +527,13 @@ component {
 				variables.transients[ transientFolder ] = true;
 			}
 		}
+
+        if ( structKeyExists( variables.config, 'singletonPattern' ) &&
+             structKeyExists( variables.config, 'transientPattern' ) ) {
+            throw 'singletonPattern and transientPattern are mutually exclusive';
+        }
 				
-		variables.config.version = '0.3.2';
+		variables.config.version = '0.4.1';
 	}
 	
 	
