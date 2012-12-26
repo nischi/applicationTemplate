@@ -67,11 +67,20 @@
 
 <cffunction name="translate" returntype="string" access="public" output="false" hint="Translates a given key into a given locale">
 	<cfargument name="key"			type="string"	required="true"		hint="Key to get value from" />
+	<cfargument name="format"		type="string"	required="false"	default="plain"	hint="To which format the key should be transformed: plain, html, js, xml" />
 	<cfargument name="args"			type="any"		required="false"	default=""	hint="Arguments for variables in translation. May be a list or array" />
 	<cfargument name="locale"		type="string"	required="false"	default="#getLocale()#"	hint="Locale to get the value from" />
 	<cfargument name="baseName"	type="string"	required="false"	default=""	hint="Base name to get the value from" />
 
-	<cfreturn getBeanFactory().getBean('i18n').formatKey(argumentCollection=arguments) />
+	<cfset local.key = getBeanFactory().getBean('i18n').formatKey(argumentCollection=arguments) />
+
+	<cfswitch expression="#lCase(arguments.format)#">
+		<cfcase value="html"><cfset local.key = htmlEditFormat(local.key) /></cfcase>
+		<cfcase value="js,javascript"><cfset local.key = jsStringFormat(local.key) /></cfcase>
+		<cfcase value="xml"><cfset local.key = xmlFormat(local.key) /></cfcase>
+	</cfswitch>
+
+	<cfreturn local.key />
 </cffunction>
 
 

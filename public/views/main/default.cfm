@@ -1,1 +1,1 @@
-﻿<cfoutput>Public Subsystem Output: #translate('translation','Variable 1,Variable 2')#</cfoutput>
+﻿<cfoutput>Public Subsystem Output: #translate(key='translation',args='Variable 1,Variable 2')#</cfoutput>
