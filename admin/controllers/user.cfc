@@ -21,4 +21,21 @@
 	<cfreturn rc />
 </cffunction>
 
+
+<cffunction name="save" returntype="struct" access="public" output="false" hint="Saves a given user">
+	<cfargument name="rc" type="struct" required="true" hint="Request-Context" />
+
+	<cfparam name="rc.isActive" type="boolean" default="false" />
+
+	<cfset rc.user = getUserService().new(rc) />
+	<cfset getUserService().validate(rc.user) />
+
+	<cfif NOT rc.user.hasErrors()>
+		<cfset getUserService().save(rc.user) />
+		<cfset getFramework().redirect('.list') />
+	</cfif>
+
+	<cfreturn rc />
+</cffunction>
+
 </cfcomponent>
