@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validateThis xsi:noNamespaceSchemaLocation="validateThis.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<conditions />
+	<contexts />
+	<objectProperties>
+		<property name="email">
+			<rule type="required" failureMessage="user.email.required" />
+			<rule type="email" failureMessage="user.email.format" />
+		</property>
+		<property name="password">
+			<rule type="required" failureMessage="user.password.required" />
+		</property>
+	</objectProperties>
+</validateThis>﻿

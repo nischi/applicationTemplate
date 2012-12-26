@@ -1,7 +1,11 @@
 ﻿<cfcomponent accessors="true" output="false" hint="baseORMService">
 
 <cffunction name="init" returntype="any" access="public" output="false" hint="Initiates the orm service">
-	<cfargument name="entityName" type="string" required="true" hint="Entity name which should be used for ORM actions" />
+	<cfargument name="entityName" type="string" required="false" default="" hint="Entity name which should be used for ORM actions" />
+
+	<cfif NOT len(arguments.entityName)>
+		<cfset arguments.entityName = listLast(getMetaData(this).fullName,'.') />
+	</cfif>
 
 	<cfset variables.entityName = arguments.entityName />
 
@@ -70,6 +74,13 @@
 	</cfif>
 
 	<cfreturn populate(argumentCollection=arguments) />
+</cffunction>
+
+
+<cffunction name="reload" returnType="void" access="public" output="false" hint="Reloads a given entity">
+	<cfargument name="entity" type="any" required="true" hint="Entity to reload" />
+
+	<cfset entityReload(arguments.entity) />
 </cffunction>
 
 
