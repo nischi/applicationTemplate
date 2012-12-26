@@ -12,4 +12,13 @@
 	<cfreturn rc />
 </cffunction>
 
+
+<cffunction name="form" returntype="struct" access="public" output="false" hint="Add a new or edit a given user">
+	<cfargument name="rc" type="struct" required="true" hint="Request-Context" />
+
+	<cfset rc.user = getUserService().new(rc) />
+
+	<cfreturn rc />
+</cffunction>
+
 </cfcomponent>
