@@ -4,11 +4,14 @@
 	<contexts />
 	<objectProperties>
 		<property name="email">
-			<rule type="required" failureMessage="user.email.required" />
-			<rule type="email" failureMessage="user.email.format" />
+			<rule type="required" />
+			<rule type="email" />
 		</property>
 		<property name="password">
-			<rule type="required" failureMessage="user.password.required" />
+			<rule type="required" />
+			<rule type="minLength">
+				<param name="minLength" value="6" />
+			</rule>
 		</property>
 	</objectProperties>
 </validateThis>
