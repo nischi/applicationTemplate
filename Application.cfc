@@ -19,7 +19,8 @@
 		<cfset local.application.ormSettings	= {
 			dbCreate=getSystemString('application.dbCreate'),
 			cfcLocation=['model/beans'],
-			eventHandling=true
+			eventHandling=true,
+			flushAtRequestEnd=false
 		} />
 	</cfif>
 

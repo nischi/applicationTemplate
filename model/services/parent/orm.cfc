@@ -21,6 +21,7 @@
 	<cfargument name="entity" type="any" required="true" hint="Entity to delete" />
 
 	<cfset entityDelete(arguments.entity) />
+	<cfset ormFlush() />
 </cffunction>
 
 
@@ -91,6 +92,7 @@
 	<cfargument name="entity" type="any" required="true" hint="Entity to save" />
 
 	<cfset entitySave(arguments.entity) />
+	<cfset ormFlush() />
 </cffunction>
 
 
