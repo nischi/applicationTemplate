@@ -144,7 +144,6 @@
 <cffunction name="validate" returnType="any" access="public" output="false" hint="Validates a given entity">
 	<cfargument name="entity"		type="any"		required="true"		hint="The actual object to validate. Note that this can also be a structure." />
 	<cfargument name="context"	type="string"	required="false"	default=""	hint="If passed, the object will be validated using the specified context. Only rules assigned to that context will be evaluated" />
-	<cfargument name="locale"		type="string"	required="false"	default="#getLocale()#"	hint="The locale the errors should be translated to" />
 
 	<cfreturn getValidateThis().validate(theObject=arguments.entity,context=arguments.context) />
 </cffunction>
