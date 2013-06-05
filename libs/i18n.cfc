@@ -182,7 +182,7 @@
 	<cfset setLocale(arguments.locale) />
 
 	<cfset local.runtimeLocale = getPageContext().getResponse().getLocale() />
-	<cfif isNull(local.locale)>
+	<cfif isNull(local.runtimeLocale)>
 		<cfset local.runtimeLocale = createObject('java','java.util.Locale').getDefault() />
 	</cfif>
 
